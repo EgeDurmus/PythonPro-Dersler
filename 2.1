@@ -1,0 +1,52 @@
+import discord
+from discord.ext import commands
+import random
+import os
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+@bot.command()
+async def notify(ctx: commands.Context, target: ChannelOrMemberConverter):
+    await target.send(f'Hello, {target.name}!')
+
+@bot.command()
+async def ignore(ctx: commands.Context, target: typing.Union[discord.Member, discord.TextChannel]):
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user} olarak giriş yaptık')
+@bot.command()
+async def multiply(ctx: commands.Context, number: int, maybe: bool):
+    if maybe is True:
+        return await ctx.send(number * 2)
+    await ctx.send(number * 5)
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Merhaba! Ben {bot.user}, bir Discord sohbet botuyum!')
+
+@bot.command()
+async def heh(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
+
+with open('text.txt', 'r', encoding='utf-8') as f:
+    print(f.read())
+
+async def mem(ctx):
+    mem_nadirlik = random.randint(1,6)
+    if mem_nadirlik == 1 or mem_nadirlik == 2 or mem_nadirlik == 3:
+        with open('images/Mem2.jpg', 'rb') as f:
+            picture = discord.File(f)
+        await ctx.send(file=picture)
+    if mem_nadirlik == 4 or mem_nadirlik == 5:
+        with open('images/Mem1.jpg', 'rb') as f:
+            picture = discord.File(f)
+        await ctx.send(file=picture)
+    if mem_nadirlik == 6:
+        with open('images/Mem1.jpg', 'rb') as f:
+            picture = discord.File(f)
+        await ctx.send(file=picture)
+    
+bot.run("GİZLİ TOKEN BURAYA")
